@@ -1,15 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {Toaster} from "react-hot-toast"
 import './App.css'
+import NotFound from "./pages/NotFound";
+import Success from "./pages/Success";
+import Home from "./pages/Home";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <h1 className='text-3xl font-bold underline bg-green-500'>Hello World</h1>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/success" element={<Success/>} />
+        <Route path="*" element={<NotFound/>} />
+      </Routes>
+      <Toaster/>
+    </Router>
   )
 }
 
