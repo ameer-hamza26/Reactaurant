@@ -18,7 +18,7 @@ const Reservation = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v1/reservation/send`,
+        "https://talented-peace-production.up.railway.app/api/v1/reservation/send",
         { firstName, lastName, email, phone, date, time },
         {
           headers: {
