@@ -5,7 +5,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "https://talented-peace-production.up.railway.app";
+// Remove trailing slash from base URL
+const API_URL = "https://talented-peace-production.up.railway.app".replace(/\/+$/, '');
 
 const Reservation = () => {
   const [firstName, setFirstName] = useState("");
@@ -38,6 +39,7 @@ const Reservation = () => {
       setDate("");
       navigate("/success");
     } catch (error) {
+      console.error('Reservation error:', error);
       const errorMessage = error.response?.data?.message || 'An error occurred while making the reservation';
       toast.error(errorMessage);
     }
