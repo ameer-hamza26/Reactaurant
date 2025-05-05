@@ -5,33 +5,52 @@ const reservationSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
-        minlength: [3, 'first name must be at least 3 characters'],
-        maxlength:[30,'first name cannot exceed 30 characters']
+        minlength: [3, 'First name must be at least 3 characters'],
+        maxlength: [30, 'First name cannot exceed 30 characters']
     },
     lastName: {
         type: String,
         required: true,
-        minlength: [3, 'last name must be at least 3 characters'],
-        maxlength:[30,'Last name cannot exceed 30 characters']
+        minlength: [3, 'Last name must be at least 3 characters'],
+        maxlength: [30, 'Last name cannot exceed 30 characters']
     },
     email: {
         type: String,
         required: true,
-        unique: true,
         validate: [validator.isEmail, 'Please enter a valid email'],
     },
     phone: {
         type: String,
         required: true,
-        validate: [validator.isMobilePhone, 'Please enter a valid phone number'],
-        minlength: [11, 'Phone number must be at least 11 digits'],
-        maxlength: [11, 'Phone number cannot exceed 11 digits'],
+        validate: {
+            validator: function(v) {
+                return /^\d{10,11}$/.test(v);
+            },
+            message: 'Please enter a valid phone number (10-11 digits)'
+        }
     },
     date: {
-        type: Date,
+        type: String,
         required: true,
+        validate: {
+            validator: function(v) {
+                return /^\d{4}-\d{2}-\d{2}$/.test(v);
+            },
+            message: 'Please enter a valid date (YYYY-MM-DD)'
+        }
     },
-    
+    time: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function(v) {
+                return /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(v);
+            },
+            message: 'Please enter a valid time (HH:MM)'
+        }
+    }
+}, {
+    timestamps: true
 });
 
 const Reservation = mongoose.model('Reservation', reservationSchema);
