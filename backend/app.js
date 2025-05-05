@@ -14,7 +14,8 @@ app.use(cors({
     origin: "https://reactaurant-7fmx-2vda1ovsa-ameer-hamza26s-projects.vercel.app/",
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    credentials: true,
+    optionsSuccessStatus: 200
 }));
 
 // Body parser middleware
