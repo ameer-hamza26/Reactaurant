@@ -1,10 +1,10 @@
 import Reservation from '../models/reservationSchema.js';
-import errorHandler from "../error/error.js";
+import { ErrorHandler } from "../error/error.js";
 
 export const sendReservation = async (req, res, next) => {
     const { firstName, lastName, email, phone, date, time } = req.body;
     if (!firstName || !lastName || !email || !phone || !date || !time) {
-        return next(new errorHandler("Please fill full reservation form", 400));
+        return next(new ErrorHandler("Please fill full reservation form", 400));
     }
 
     try {
@@ -13,9 +13,9 @@ export const sendReservation = async (req, res, next) => {
     } catch (error) {
         if (error.name === "ValidationError") {
             const validationErrors = Object.values(error.errors).map((err) => err.message);
-            return next(new errorHandler(validationErrors.join(' , '), 400));
+            return next(new ErrorHandler(validationErrors.join(' , '), 400));
         }
-        next(error);
+        return next(new ErrorHandler(error.message, 500));
     }
 };
 
