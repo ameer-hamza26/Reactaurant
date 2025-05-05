@@ -11,7 +11,7 @@ dbConnection();
 
 // CORS configuration
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://reactaurant-7fmx-2vda1ovsa-ameer-hamza26s-projects.vercel.app/",
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
