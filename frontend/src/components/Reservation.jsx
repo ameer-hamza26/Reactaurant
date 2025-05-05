@@ -5,6 +5,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = "https://talented-peace-production.up.railway.app";
+
 const Reservation = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -18,7 +20,7 @@ const Reservation = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v1/reservation/send`,
+        `${API_URL}/api/v1/reservation/send`,
         { firstName, lastName, email, phone, date, time },
         {
           headers: {
