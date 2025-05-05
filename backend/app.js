@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import dbConnection from './database/dbConnection.js';
 import { errorMiddleware } from './error/error.js';
 import reservationRoutes from './routes/reservation.routes.js';
-import rateLimit from 'express-rate-limit';
 
 const app = express();
 dotenv.config();
@@ -16,13 +15,6 @@ if (!process.env.FRONTEND_URL) {
 
 // Database connection
 dbConnection();
-
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
-app.use(limiter);
 
 // CORS configuration
 const allowedOrigins = [
